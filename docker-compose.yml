@@ -1,0 +1,20 @@
+services:
+  server:
+    build: ./services/server
+    ports:
+      - "8080:8080"
+    networks:
+      - wet_work
+  client_one:
+    build: ./services/client
+    ports:
+      - "8081:8080"
+    networks:
+      - wet_work
+  # client_two:
+  #   build: alpine
+  #   ports:
+  #     - "8082:8080"
+networks:
+  wet_work:
+    driver: bridge
