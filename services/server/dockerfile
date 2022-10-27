@@ -1,1 +1,9 @@
 FROM alpine
+    RUN apk update && apk upgrade --available
+    RUN apk add --update python3 py3-pip
+    COPY ./docker-entrypoint.sh /
+    RUN chmod +x /docker-entrypoint.sh
+    COPY ./requirements.txt /
+    RUN pip install -r ./requirements.txt
+    RUN rm /requirements.txt
+    ENTRYPOINT [ "/docker-entrypoint.sh" ]
