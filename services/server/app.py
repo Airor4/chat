@@ -1,15 +1,17 @@
 import websockets
 import asyncio
 
-async def handle_message(websocket, payload):
+async def handle_message(websocket):
     """Recieves a message and broadcasts it to the rest of the clients
     params
     """
-    payload = await websocket.recv()
-    # broadcast
-    # maybe store in sqlite
+    while True:
+        payload = await websocket.recv()
+        print(payload)
 
-start_server = websockets.serve(handle_message, 'localhost', 8765)
+async def main():
+    async with websockets.serve(handle_message, "", 8763):
+        await asyncio.Future()  # run forever
 
-asyncio.get_event_loop().run_until_complete(start_server)
-asyncio.get_event_loop().run_forever()
+if __name__ == '__main__':
+    asyncio.run(main())
