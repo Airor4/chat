@@ -5,9 +5,9 @@ async def handle_message(websocket):
     """Recieves a message and broadcasts it to the rest of the clients
     params
     """
-    while True:
-        payload = await websocket.recv()
-        print(payload)
+    print('blahhhh')
+    async for message in websocket:
+        print(message)
 
 async def main():
     async with websockets.serve(handle_message, "", 8763):
