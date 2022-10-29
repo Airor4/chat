@@ -2,15 +2,15 @@ services:
   server:
     container_name: server
     build: ./services/server
-    ports:
-      - 8763:8763
     networks:
       - wet-work
     volumes:
       - type: bind
         source: ./services/server
         target: /usr/local/src/app
-
+    environment:
+      - WEBSOCKET_ENV=prod
+ 
   client_one:
     container_name: client_one
     build: ./services/client
@@ -25,3 +25,4 @@ services:
 networks:
   wet-work:
     driver: bridge
+
